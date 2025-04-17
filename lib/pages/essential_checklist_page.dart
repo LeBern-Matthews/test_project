@@ -55,14 +55,14 @@ class _EssentialChecklistPageState extends State<EssentialChecklistPage>
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16),
               child: Text(
                     "${(progress).toDouble()} Complete",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height - 200, // Adjust height as needed
+              height: MediaQuery.of(context).size.height - 10, // Adjust height as needed
               child: ListView.builder(
                 itemCount: _items.length,
                 itemBuilder: (BuildContext context, int index) {

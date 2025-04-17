@@ -24,30 +24,29 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
       ),
       body: Column(
         children: [
+          SizedBox(height: 60,),
           Container(
-            padding: const EdgeInsets.all(20.0),
-            color: Colors.green[100],
-            child: const Text(
-              "Welcome to the Home Page",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
-            color: Colors.blue[100],
+            padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
+            //color: Colors.blue[100],
             child: Column(
               children: [
                 LinearProgressIndicator(
+                  minHeight: 5,
                   value: progress,
                   backgroundColor: Colors.grey[300],
                   color: Colors.green,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 Text(
                   "${(progress * 100).toInt()}% Complete", // Display progress percentage
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, backgroundColor: Colors.deepOrange),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 100),
+                const Text("Map",style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+                Divider(
+                  color: const Color.fromARGB(255, 188, 177, 177),
+                  thickness: 0.5,
+                )
               ],
             ),
           ),

@@ -57,9 +57,11 @@ class _RootPageState extends State<RootPage> {
         children: pages, // Keep all pages in memory
       ),
       bottomNavigationBar: NavigationBar(
+
+        shadowColor: Colors.grey,
         backgroundColor: Theme.of(context).colorScheme.primary,
         height: 60, // Set the background color of the navigation bar
-        //labelPadding: const Edge, // Add padding to the label
+        
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         destinations: [
           NavigationDestination(icon: Icon(Icons.home), label: "", tooltip: "Home"),
