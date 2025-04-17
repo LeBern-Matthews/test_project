@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:test_project/components/country_selector.dart'; // Add this import
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -9,8 +9,10 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool _isCountryExpanded = false; // Add state variable
-  bool _isThemeExpanded = false; // Add state variable
+  bool _isCountryExpanded = false;
+  bool _isThemeExpanded = false;
+  String _selectedCountry = "Select a country"; // Add this variable
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,55 +21,52 @@ class _SettingsPageState extends State<SettingsPage> {
         centerTitle: false,
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
-      body: Column(
-        children: [
-          DropdownMenu(dropdownMenuEntries: const [
-            DropdownMenuEntry<String>(
-              value: "English",
-              label: "English",
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ListTile(
+              title: const Text("Theme"),
+              subtitle: const Text("Change the app theme"),
+              trailing: IconButton(
+                icon: Icon(
+                  _isThemeExpanded
+                      ? Icons.arrow_drop_up_rounded
+                      : Icons.arrow_drop_down_rounded,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isThemeExpanded = !_isThemeExpanded;
+                  });
+                },
+              ),
             ),
-            DropdownMenuEntry<String>(
-              value: "Spanish",
-              label: "Spanish",
-            ),
-            DropdownMenuEntry<String>(
-              value: "French",
-              label: "French",
-            ),
-          ], trailingIcon: Icon(Icons.arrow_drop_down_rounded) ,
-          selectedTrailingIcon: Icon(Icons.arrow_drop_up_rounded),),
-          ListTile(
-            title: const Text("Theme"),
-            subtitle: const Text("Change the app theme"),
-            trailing: IconButton(icon: Icon(
-                _isThemeExpanded // Use the state variable in ternary operator
+            ExpansionTile(
+              title: const Text("Country"),
+              subtitle: Text(_selectedCountry),
+              trailing: Icon(
+                _isCountryExpanded
                     ? Icons.arrow_drop_up_rounded
                     : Icons.arrow_drop_down_rounded,
               ),
-              onPressed: () {
+              onExpansionChanged: (bool expanded) {
                 setState(() {
-                  _isThemeExpanded = !_isThemeExpanded; // Toggle the state
+                  _isCountryExpanded = expanded;
                 });
               },
+              children: countryOptions().map((country) {
+                return ListTile(
+                  title: Text(country),
+                  onTap: () {
+                    setState(() {
+                      _selectedCountry = country;
+                      _isCountryExpanded = false;
+                    });
+                  },
+                );
+              }).toList(),
             ),
-          ),
-          ListTile(
-            title: const Text("Country"),
-            subtitle: const Text("Change the country"),
-            trailing: IconButton(
-              icon: Icon(
-                _isCountryExpanded // Use the state variable in ternary operator
-                    ? Icons.arrow_drop_up_rounded
-                    : Icons.arrow_drop_down_rounded,
-              ),
-              onPressed: () {
-                setState(() {
-                  _isCountryExpanded = !_isCountryExpanded; // Toggle the state
-                });
-              },
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

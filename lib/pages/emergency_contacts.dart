@@ -11,6 +11,7 @@ class EmergencyContactsPage extends StatefulWidget {
 class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
 
   Future<void> _makePhoneCall(String phoneNumber) async {
+    // Check if the device can launch the URL.
     final Uri launchUri = Uri(
       scheme: 'tel',
       path: phoneNumber,
@@ -23,8 +24,6 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
       // Optionally show an error message to the user
     }
   }
-
-
 
   String country = "Country"; // Default country value
   @override
