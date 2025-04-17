@@ -44,7 +44,7 @@ class _EmergencyContactsPageState extends State<EmergencyContactsPage> {
             ),
           ),
           const SizedBox(height: 20),
-          Divider( color: const Color.fromARGB(255, 188, 177, 177), thickness: 1),
+          Divider( color: const Color.fromARGB(255, 188, 177, 177), thickness: 1, indent: 20, endIndent: 20,),
           const SizedBox(height: 60),
           Padding(
             padding: const EdgeInsets.only(left:20, right: 20),

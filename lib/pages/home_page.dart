@@ -45,8 +45,9 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                 const Text("Map",style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
                 Divider(
                   color: const Color.fromARGB(255, 188, 177, 177),
-                  thickness: 0.5,
-                )
+                  thickness: 1,
+                ),
+                
               ],
             ),
           ),
