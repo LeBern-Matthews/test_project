@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:test_project/components/country_selector.dart'; // Add this import
+import 'package:provider/provider.dart';
+import 'package:test_project/themes/theme_provider.dart';
+import 'package:test_project/themes/light_mode.dart';
+import 'package:test_project/themes/dark_mode.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -24,22 +28,48 @@ class _SettingsPageState extends State<SettingsPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ListTile(
+            SizedBox(height: 30),
+            ExpansionTile(
               title: const Text("Theme"),
               subtitle: const Text("Change the app theme"),
-              trailing: IconButton(
-                icon: Icon(
-                  _isThemeExpanded
-                      ? Icons.arrow_drop_up_rounded
-                      : Icons.arrow_drop_down_rounded,
-                ),
-                onPressed: () {
-                  setState(() {
-                    _isThemeExpanded = !_isThemeExpanded;
-                  });
-                },
+              trailing: Icon(
+                _isThemeExpanded
+                    ? Icons.arrow_drop_up_rounded
+                    : Icons.arrow_drop_down_rounded,
               ),
+              onExpansionChanged: (bool expanded) {
+                setState(() {
+                  _isThemeExpanded = expanded;
+                });
+              },
+              children: [
+                ListTile(
+                  title: const Text("Light"),
+                  leading: const Icon(Icons.light_mode),
+                  onTap: () {
+                    // Get the ThemeProvider and set light theme
+                    Provider.of<ThemeProvider>(context, listen: false)
+                        .setTheme(lightmode);
+                    setState(() {
+                      _isThemeExpanded = false; // Close the expansion tile
+                    });
+                  },
+                ),
+                ListTile(
+                  title: const Text("Dark"),
+                  leading: const Icon(Icons.dark_mode),
+                  onTap: () {
+                    // Get the ThemeProvider and set dark theme
+                    Provider.of<ThemeProvider>(context, listen: false)
+                        .setTheme(darkmode);
+                    setState(() {
+                      _isThemeExpanded = false; // Close the expansion tile
+                    });
+                  },
+                ),
+              ],
             ),
+            SizedBox(height: 30),
             ExpansionTile(
               title: const Text("Country"),
               subtitle: Text(_selectedCountry),

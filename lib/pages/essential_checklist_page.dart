@@ -51,40 +51,39 @@ class _EssentialChecklistPageState extends State<EssentialChecklistPage>
         backgroundColor: Colors.blue[100],
         iconTheme: const IconThemeData(color: Colors.white, size: 2),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                    "${(progress).toDouble()} Complete",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      body: Column(
+        children: [
+          // Progress indicator at the top
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Text(
+              "${(progress * 100).toInt()}% Complete",
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          // Expanded ListView for the checklist items
+          Expanded(
+            child: ListView.builder(
+              itemCount: _items.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text(_items[index]),
+                  leading: Icon(
+                    _isChecked[index]
+                        ? Icons.check_box_rounded
+                        : Icons.check_box_outline_blank_rounded,
                   ),
+                  onTap: () {
+                    setState(() {
+                      _isChecked[index] = !_isChecked[index];
+                    });
+                    __fillProgressBar();
+                  },
+                );
+              },
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height - 10, // Adjust height as needed
-              child: ListView.builder(
-                itemCount: _items.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    title: Text(_items[index]),
-                    leading: Icon(
-                      _isChecked[index]
-                          ? Icons.check_box_rounded
-                          : Icons.check_box_outline_blank_rounded,
-                    ),
-                    onTap: () {
-                      setState(() {
-                        _isChecked[index] = !_isChecked[index];
-                      });
-                      __fillProgressBar();
-                    },
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
