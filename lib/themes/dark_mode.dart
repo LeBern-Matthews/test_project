@@ -4,14 +4,16 @@ ThemeData darkmode = ThemeData(
   brightness: Brightness.dark,
   colorScheme: ColorScheme.dark(
     surface: const Color.fromRGBO(30, 30, 30, 1),
-    background: const Color.fromRGBO(18, 18, 18, 1),
     primary: const Color.fromRGBO(119, 147, 169, 1),
     secondary: const Color.fromRGBO(83, 102, 118, 1),
     tertiary: const Color.fromRGBO(84, 83, 51, 1),
     onSurface: Colors.white,
-    onBackground: Colors.white,
     onPrimary: Colors.white,
     onSecondary: Colors.white,
+  ).copyWith(
+    brightness: Brightness.dark,
+    primary: const Color.fromRGBO(119, 147, 169, 1),
+    surface: const Color.fromRGBO(30, 30, 30, 1),
   ),
   scaffoldBackgroundColor: const Color.fromRGBO(18, 18, 18, 1),
   appBarTheme: const AppBarTheme(
@@ -44,8 +46,15 @@ ThemeData darkmode = ThemeData(
   navigationBarTheme: NavigationBarThemeData(
     backgroundColor: const Color.fromRGBO(30, 30, 30, 1),
     indicatorColor: Colors.blue,
-    iconTheme: MaterialStateProperty.all(
-      const IconThemeData(color: Colors.white),
+    labelTextStyle: MaterialStateProperty.all(
+      const TextStyle(color: Colors.white),
     ),
   ),
+  pageTransitionsTheme: const PageTransitionsTheme(
+    builders: {
+      TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+    },
+  ),
+  visualDensity: VisualDensity.adaptivePlatformDensity,
 );

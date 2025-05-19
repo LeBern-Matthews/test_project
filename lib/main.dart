@@ -24,10 +24,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Provider.of<ThemeProvider>(context).themeData,
-      home: RootPage(),
+      themeMode: ThemeMode.system,
+      // Reduce animation duration from 300ms to 150ms
+      themeAnimationDuration: const Duration(milliseconds: 0),
+      themeAnimationCurve: Curves.easeInOut,
+      home: const RootPage(),
     );
   }
 }
